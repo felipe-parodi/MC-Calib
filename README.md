@@ -15,18 +15,19 @@ There are several ways to get the environment ready. Choose any of them:
 
 1. The easiest way to get the environment is to pull it from the Docker Hub:
 
-   - [Install](https://docs.docker.com/engine/install/) docker.
-
-   - Pull the image:
+   - [Install](https://docs.docker.com/engine/install/) docker and run Docker Desktop.
+  
+   - In cmd, pull the image:
 
      ```bash
      docker pull bailool/mc-calib-prod # production environment
      docker pull bailool/mc-calib-dev  # development environment
      ```
 
-   - Run pulled image:
+   - Run pulled image: # if you are working with samba shares, then first [docker create volume](https://docs.docker.com/storage/volumes/#create-cifssamba-volumes)
    
       ```bash
+      
       docker run \
                   -ti --rm \
                   --volume="${PWD}:/home/MC-Calib" \
