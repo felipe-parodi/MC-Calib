@@ -12,8 +12,8 @@ boards_index: [0,1,2]           # leave it empty [] if the board index are rangi
 square_size: 0.192         # size of each square of the board in cm/mm/whatever you want
 
 ############# Boards Parameters for different board size (leave empty if all boards have the same size) #################
-number_x_square_per_board: [5, 7, 6]
-number_y_square_per_board: [7, 4, 6]
+number_x_square_per_board: [5, 7, 6] # cols
+number_y_square_per_board: [7, 4, 6] # rows
 square_size_per_board: [0.14, 0.138, 0.163]
 resolution_x_per_board: [1000, 500, 1000]
 resolution_y_per_board: [1000, 500, 1000]

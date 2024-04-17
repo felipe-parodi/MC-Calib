@@ -98,8 +98,8 @@ def Func_cameraDisplay(rot_cam, trans_cam, cam_size, cam_edge, cam_color, ax):
 #path_root = "/home/francois/Documents/CppProject/Stereo_Calibration/Images_Synth_4cam_8boards_4groups_NonOverlap/"
 #path_root = "/disk/francois/Projets/Calibration_toolbox/Data/Real_Images/2021-07-12-15-09-53/"
 #path_root = "/disk/francois/Projets/Calibration_toolbox/Data/Real_Images/stereo_cube/"
-path_root = "/disk/francois/Projets/Calibration_toolbox/Data/Real_Images/2021-07-12-15-09-53/"
-path_calib_results = path_root + "calibrated_cameras_data.yml"
+path_root = r"F:\EnclosureProjects\inprep\MacTrack\CalibrationTests\2024_Calibration_Tests\calibNmonkey\20240325_hookehedy\calibration\multical"
+path_calib_results = path_root + "MCCalibcalibrated_cameras_data.yml"
 cam_size = 3
 cam_edge = 2
 cam_color = [0.0, 0.0, 0.0]

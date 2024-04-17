@@ -21,6 +21,9 @@ int main(int argc, char *argv[]) {
   std::vector<int> number_x_square_per_board, number_y_square_per_board;
   std::vector<int> resolution_x_per_board, resolution_y_per_board;
   std::vector<double> square_size_per_board;
+  std::vector<double> marker_size_per_board;
+  std::vector<int> start_ids;
+  
   cv::FileStorage fs; // FileStorage to read calibration params from file
   const bool is_file_available =
       boost::filesystem::exists(pathInt) && pathInt.length() > 0;
@@ -40,11 +43,14 @@ int main(int argc, char *argv[]) {
   assert(NbBoard > 0);
   unsigned int num_board = static_cast<int>(NbBoard);
 
-  fs["square_size_per_board"] >> square_size_per_board;
+  fs["number_board"] >> NbBoard;
+  fs["start_ids"] >> start_ids;
   fs["number_x_square_per_board"] >> number_x_square_per_board;
   fs["number_y_square_per_board"] >> number_y_square_per_board;
   fs["resolution_x_per_board"] >> resolution_x_per_board;
   fs["resolution_y_per_board"] >> resolution_y_per_board;
+  fs["square_size_per_board"] >> square_size_per_board;
+  fs["marker_size_per_board"] >> marker_size_per_board;
 
   fs.release(); // close the input file
 
@@ -58,16 +64,43 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // Create the charuco
+//   // Create the charuco
   cv::Ptr<cv::aruco::Dictionary> dict =
-      cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_1000);
+    cv::aruco::getPredefinedDictionary(cv::aruco::DICT_5X5_100);
   std::vector<cv::Ptr<cv::aruco::CharucoBoard>> charucoBoards;
+
+  for (std::size_t i = 0; i < num_board; i++) {
+      cv::Ptr<cv::aruco::CharucoBoard> charuco = cv::aruco::CharucoBoard::create(
+          number_x_square_per_board[i], number_y_square_per_board[i],
+          square_size_per_board[i], marker_size_per_board[i], dict);
+
+//       // Set start ID for each board
+//       charuco->ids.clear();  // Clear default IDs
+//       for (int j = 0; j < number_x_square_per_board[i] * number_y_square_per_board[i]; j++) {
+//           charuco->ids.push_back(start_ids[i] + j);  // Assign new IDs starting from start_ids[i]
+//       }
+
+//       charucoBoards.push_back(charuco);
+//       cv::Mat boardImage;
+//       charuco->draw(cv::Size(resolution_x_per_board[i], resolution_y_per_board[i]), boardImage, 10, 1);
+
+//       // Save the board image
+//       std::ostringstream ss;
+//       ss << std::setw(3) << std::setfill('0') << i;
+//       std::string filename = "charuco_board_" + ss.str() + ".bmp";
+//       std::cout << "Saving " << filename << std::endl;
+//       cv::imwrite(filename, boardImage);
+//   }
+
+//   return 0;
+// }
+
   int offset_count = 0;
   for (std::size_t i = 0; i < num_board; i++) {
     // declare the board
     cv::Ptr<cv::aruco::CharucoBoard> charuco = cv::aruco::CharucoBoard::create(
-        number_x_square_per_board[i], number_y_square_per_board[i],
-        length_square, length_marker, dict);
+          number_x_square_per_board[i], number_y_square_per_board[i],
+          square_size_per_board[i], marker_size_per_board[i], dict);
     // If it is the first board then just use the standard idx
     if (i != 0) {
       int id_offset = charucoBoards[i - 1]->ids.size() + offset_count;
@@ -98,4 +131,5 @@ int main(int argc, char *argv[]) {
   }
 
   return 0;
+}
 }

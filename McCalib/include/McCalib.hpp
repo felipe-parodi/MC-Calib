@@ -36,7 +36,7 @@ public:
   // Parameters
   unsigned int nb_camera_, nb_board_;
   cv::Ptr<cv::aruco::Dictionary> dict_ = cv::aruco::getPredefinedDictionary(
-      cv::aruco::DICT_6X6_1000); // load the dictionary that correspond to the
+      cv::aruco::DICT_5X5_100); // load the dictionary that correspond to the
                                  // charuco board
   cv::Ptr<cv::aruco::DetectorParameters> charuco_params_ =
       cv::aruco::DetectorParameters::create(); // parameters for detection
