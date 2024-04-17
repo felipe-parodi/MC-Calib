@@ -24,12 +24,13 @@ There are several ways to get the environment ready. Choose any of them:
      docker pull bailool/mc-calib-dev  # development environment
      ```
 
-   - Run pulled image:
+   - Run pulled image: # if you are working with samba shares, then first [docker create volume](https://docs.docker.com/storage/volumes/#create-cifssamba-volumes)
    
       ```bash
+      
       docker run \
                   -ti --rm \
-                  --volume="${PWD}:/home/MC-Calib" \ # ensure PWD is not on a mounted drive?
+                  --volume="${PWD}:/home/MC-Calib" \
                   --volume="PATH_TO_DATA:/home/MC-Calib/data" \
                   bailool/mc-calib-prod
       #xhost -local:root  # resetting permissions
