@@ -29,7 +29,7 @@ There are several ways to get the environment ready. Choose any of them:
       ```bash
       docker run \
                   -ti --rm \
-                  --volume="${PWD}:/home/MC-Calib" \
+                  --volume="${PWD}:/home/MC-Calib" \ # ensure PWD is not on a mounted drive?
                   --volume="PATH_TO_DATA:/home/MC-Calib/data" \
                   bailool/mc-calib-prod
       #xhost -local:root  # resetting permissions
